@@ -15,9 +15,12 @@
 
 | 文件 | 说明 |
 |---|---|
-| `MSI PSU Control.exe` | 图形界面，双击即用 |
+| `MSI.PSU.Control.exe` | 图形界面，双击即用 |
 | `msi-psu-cli.exe` | 命令行版本 |
 | `SHA256SUMS.txt` | 校验和 |
+
+> 发布页的文件名里是**点号**（`MSI.PSU.Control.exe`）—— GitHub 会把空格换成点。
+> 本地自行打包时得到的是带空格的 `MSI PSU Control.exe`，两者是同一个程序。
 
 **exe 由 GitHub Actions 从本仓库源码自动构建**（配置见 [.github/workflows/build.yml](.github/workflows/build.yml)），
 所以每个发布的二进制都能对应到具体的源码版本。
