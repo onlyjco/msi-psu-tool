@@ -26,3 +26,6 @@ msi-center-backup/
 Thumbs.db
 desktop.ini
 *.tmp
+
+# 开发时产生的临时截图（out_main/out_fan/out_zoom/out_week/out_dashboard 为 README 引用，故不忽略）
+out_header.png

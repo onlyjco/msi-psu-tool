@@ -5,6 +5,8 @@
 
 在 **MEG Ai1300P PCIE5** 上完整实测通过。
 
+<img src="out_main.png" width="880" alt="主界面">
+
 ---
 
 ## 这是什么
@@ -62,9 +64,23 @@ MSI Center 的"Power Supply Unit"组件本质上只是一个 **HID 客户端**�
 底部          保护告警状态 + 12V-2x6 各针脚电流（TS 型号）
 ```
 
+**直流输出与风扇区域细节：**
+
+<img src="out_fan.png" width="720" alt="直流输出与风扇区域">
+
+**点击接口示意图可放大查看接线对应关系：**
+
+<img src="out_zoom.png" width="560" alt="接口布局放大">
+
+**用电统计与近 7 天用电（柱状图带 kWh 单位）：**
+
+<img src="out_week.png" width="640" alt="用电统计与近 7 天用电">
+
 ### 页面二：实时仪表板
 
 点右上角 **「实时仪表板」** 进入，**「返回」** 回到主界面。
+
+<img src="out_dashboard.png" width="880" alt="实时仪表板">
 
 9 个滚动曲线图，与原版 `UC_Dashboard_Page` 的图表集合和顺序一致：
 
