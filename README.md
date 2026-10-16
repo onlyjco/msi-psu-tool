@@ -9,6 +9,37 @@
 
 ---
 
+## 直接下载（推荐）
+
+不想装 Python 的话，到 **[Releases](../../releases)** 下载打包好的 exe：
+
+| 文件 | 说明 |
+|---|---|
+| `MSI PSU Control.exe` | 图形界面，双击即用 |
+| `msi-psu-cli.exe` | 命令行版本 |
+| `SHA256SUMS.txt` | 校验和 |
+
+**exe 由 GitHub Actions 从本仓库源码自动构建**（配置见 [.github/workflows/build.yml](.github/workflows/build.yml)），
+所以每个发布的二进制都能对应到具体的源码版本。
+
+> ### ⚠️ 杀毒软件可能误报
+>
+> 打包用的是 **PyInstaller**，它的自解压结构**与某些病毒的特征相似**，
+> 因此部分杀软会报「Trojan」或「可疑」。**这是 PyInstaller 的已知行业问题，
+> 与本项目代码无关。**
+>
+> 另外 exe **没有代码签名证书**（个人项目通常不购买），
+> Windows SmartScreen 会弹「未识别的应用」—— 点 **更多信息 → 仍要运行**。
+>
+> **不放心就自己构建**：源码就在仓库里，见 [安装](#安装)。
+> 下载后也可以核对校验和：
+>
+> ```powershell
+> Get-FileHash "MSI PSU Control.exe" -Algorithm SHA256
+> ```
+
+---
+
 ## 这是什么
 
 MSI Center 的"Power Supply Unit"组件本质上只是一个 **HID 客户端**：
@@ -202,13 +233,38 @@ MSI 原程序对所有型号都会调用 `ZERO_FAN_ENABLE`（命令 67），但*
 
 ## 安装
 
-只需要 Python 3 和 `hidapi`：
+### 方式一：下载打包好的 exe
+
+见上方 [直接下载](#直接下载推荐)，无需 Python。
+
+### 方式二：从源码运行
+
+需要 Python 3.10+ 和 `hidapi`：
 
 ```powershell
-python -m pip install hidapi
+python -m pip install -r requirements.txt
 ```
 
 无需管理员权限 —— 设备挂的是系统自带 `HidUsb` 驱动，普通用户态即可读写。
+
+### 方式三：自己打包成单文件 exe
+
+```powershell
+python -m pip install pyinstaller
+
+# 图形界面（无控制台黑框）
+python -m PyInstaller --onefile --windowed --name "MSI PSU Control" `
+  --distpath dist --workpath build --specpath build `
+  --paths src --hidden-import i18n --hidden-import msi_psu_dashboard `
+  --hidden-import win_dpi --add-data "$PWD/assets;assets" src/msi_psu_app.py
+
+# 命令行（保留控制台）
+python -m PyInstaller --onefile --console --name "msi-psu-cli" `
+  --distpath dist --workpath build --specpath build `
+  --paths src --hidden-import i18n src/msi_psu.py
+```
+
+`--add-data` 用 `;` 分隔源和目标（Windows 约定），源路径需要是绝对路径。
 
 ## 使用
 
