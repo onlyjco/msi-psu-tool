@@ -79,9 +79,21 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
+          # Use the annotated tag's message as the release body when the tag
+          # carries one (that is where the hand-written highlights live), and
+          # fall back to the generated commit list otherwise.
+          #
+          # The check must be the tag OBJECT type: asking for '%(contents)'
+          # also returns the commit message for a lightweight tag, which would
+          # wrongly select --notes-from-tag.
+          notes_flag="--generate-notes"
+          if [ "$(git cat-file -t "${GITHUB_REF_NAME}" 2>/dev/null)" = "tag" ]; then
+            notes_flag="--notes-from-tag"
+          fi
+          echo "release notes mode: ${notes_flag}"
           gh release create "${GITHUB_REF_NAME}" \
             --title "${GITHUB_REF_NAME}" \
-            --generate-notes \
+            "${notes_flag}" \
             "dist/MSI PSU Control.exe" \
             "dist/msi-psu-cli.exe" \
             "dist/SHA256SUMS.txt"
