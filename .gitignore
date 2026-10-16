@@ -1,0 +1,28 @@
+# ---- 构建产物（不提交二进制）----
+dist/
+build/
+*.spec
+
+# ---- Python ----
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+
+# ---- 版权风险：MSI 反编译输出（不得公开）----
+reference/
+
+# ---- 个人数据：MSI 运行日志与统计（含使用历史）----
+msi-center-backup/
+
+# ---- MSI 原版美术资源（版权归 MSI）----
+# 取消下一行注释可排除；排除后「接口布局」功能会自动跳过，不影响其他功能
+# assets/
+
+# ---- 编辑器 / 系统 ----
+.vscode/
+.idea/
+Thumbs.db
+desktop.ini
+*.tmp
