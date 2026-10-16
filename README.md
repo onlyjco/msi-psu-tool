@@ -74,7 +74,7 @@ MSI Center 的"Power Supply Unit"组件本质上只是一个 **HID 客户端**�
 
 **用电统计与近 7 天用电（柱状图带 kWh 单位）：**
 
-<img src="out_week.png" width="640" alt="用电统计与近 7 天用电">
+<img src="out_week.png" width="780" alt="用电统计与近 7 天用电">
 
 ### 页面二：实时仪表板
 
